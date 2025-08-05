@@ -19,11 +19,12 @@ type SidebarProps = {
 
 const navItems = [
   { label: 'Dashboard', path: '/dashboard', icon: <Home className="w-5 h-5" /> },
-  { label: 'Clientes', path: '/clientes', icon: <Users className="w-5 h-5" /> },
-  { label: 'Citas', path: '/citas', icon: <Calendar className="w-5 h-5" /> },
-  { label: 'Servicios', path: '/servicios', icon: <Scissors className="w-5 h-5" /> },
+  { label: 'Clientes', path: '/clients', icon: <Users className="w-5 h-5" /> },
+  { label: 'Usuarios', path: '/users', icon: <Users className="w-5 h-5" /> }, // 👈 agregado
+  { label: 'Citas', path: '/appointments', icon: <Calendar className="w-5 h-5" /> },
+  { label: 'Servicios', path: '/services', icon: <Scissors className="w-5 h-5" /> },
   { label: 'Reportes', path: '/reportes', icon: <FileText className="w-5 h-5" /> },
-];
+]
 
 export default function Sidebar({ isMobile = false, onClose }: SidebarProps) {
   const { user, logout } = useAuth();

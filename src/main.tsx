@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import { AuthProvider } from "@/features/auth/context/AuthProvider";
 import { Toaster } from "sonner";
 
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>

@@ -6,7 +6,7 @@ export default function DashboardPage() {
   const { user, logout } = useAuth();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-muted gap-6 px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-6 px-4">
       <div className="text-center">
         <h1 className="text-3xl font-bold">
           ¡Bienvenido, {user?.email}!

@@ -43,7 +43,7 @@ export default function PrivateLayout() {
       </div>
 
       {/* Contenido principal */}
-      <main className={`flex-1 ${!sidebarOpen ? ' ml-0' : ''}`}>
+         <main className={`flex-1 p-6 md:p-8 transition-all ${!sidebarOpen ? 'ml-15' : 'ml-2'}`}>
         <Outlet />
       </main>
     </div>
