@@ -39,16 +39,7 @@ export function ClientListPage() {
     }
   };
 
-  const handleDelete = async (id: number) => {
-    try {
-      await deleteClient(id);
-      toast.success("Cliente eliminado");
-      fetchClients();
-    } catch (error) {
-      console.error(error);
-      toast.error("No se pudo eliminar el cliente");
-    }
-  };
+
 
   const handleEdit = (id: number) => {
     navigate(`/clients/${id}/edit`);
