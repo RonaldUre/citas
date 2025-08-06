@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fullcalendar/core':
+        specifier: ^6.1.18
+        version: 6.1.18
       '@fullcalendar/daygrid':
         specifier: ^6.1.18
         version: 6.1.18(@fullcalendar/core@6.1.18)

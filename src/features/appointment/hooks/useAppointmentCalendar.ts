@@ -15,6 +15,7 @@ type CalendarEvent = {
   end: string;
   backgroundColor?: string;
   extendedProps: {
+    id: number; // ✅ necesario para poder hacer update status
     client: string;
     professional: string;
     status: AppointmentStatus;
@@ -51,6 +52,7 @@ export const useAppointmentCalendar = (
           end: calculateEnd(a.date, 45),
           backgroundColor: getStatusColor(a.status),
           extendedProps: {
+            id: a.id, // ✅ aquí está la clave para poder hacer PATCH
             client: a.client.name,
             professional: a.user.name,
             status: a.status,
