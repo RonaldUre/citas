@@ -1,3 +1,4 @@
+import type { AppointmentResponse } from '@/features/appointment/types/appointmentTypes'
 import { api } from '@/lib/axios'
 import { type PaginatedResponse } from '@/types/pagination'
 
@@ -19,12 +20,6 @@ export interface CreateClientPayload {
 
 export type UpdateClientPayload = Partial<CreateClientPayload>
 
-export interface Appointment {
-  id: number
-  date: string
-  time: string
-  // Agrega más campos si tu modelo lo tiene
-}
 
 export const getClients = (page = 1, limit = 10) =>
   api.get<PaginatedResponse<Client>>('/clients', {
@@ -44,7 +39,7 @@ export const deleteClient = (id: number) =>
   api.delete(`/clients/${id}`)
 
 export const getClientAppointments = (id: number) =>
-  api.get<Appointment[]>(`/clients/${id}/appointments`)
+  api.get<AppointmentResponse[]>(`/clients/${id}/appointments`);
 
 export const getAllClients = () =>
   api.get<Client[]>('/clients/all')

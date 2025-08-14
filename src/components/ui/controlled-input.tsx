@@ -1,44 +1,47 @@
-import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form';
-import { Input } from './input';
-import { Label } from './label';
+// ControlledInput.tsx
+import * as React from "react";
+import { Controller, type Control, type FieldValues, type Path } from "react-hook-form";
+import { Input } from "@/components/ui/input"; // shadcn input
+import { Label } from "@/components/ui/label";
 
-interface ControlledInputProps<T extends FieldValues> {
-  control: Control<T>;
-  name: Path<T>;
-  label: string;
-  type?: string;
-  placeholder?: string;
+type NativeInputProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "name" | "value" | "defaultValue" | "onChange"
+>;
+
+export interface ControlledInputProps<TFieldValues extends FieldValues> extends NativeInputProps {
+  name: Path<TFieldValues>;
+  control: Control<TFieldValues>;
+  label?: string;
+  containerClassName?: string;
+  labelClassName?: string;
 }
 
-export function ControlledInput<T extends FieldValues>({
-  control,
+export function ControlledInput<TFieldValues extends FieldValues>({
   name,
+  control,
   label,
-  type = 'text',
-  placeholder,
-}: ControlledInputProps<T>) {
+  containerClassName,
+  labelClassName,
+  ...rest // ← aquí vienen autoComplete, inputMode, type, placeholder, etc.
+}: ControlledInputProps<TFieldValues>) {
+  const id = rest.id ?? String(name);
   return (
-    <div className="grid gap-1">
-      <Label htmlFor={name}>{label}</Label>
+    <div className={containerClassName}>
+      {label && <Label htmlFor={id} className={labelClassName}>{label}</Label>}
       <Controller
-        control={control}
         name={name}
+        control={control}
         render={({ field, fieldState }) => (
-          <>
-            <Input
-              id={name}
-              type={type}
-              placeholder={placeholder}
-              {...field}
-            />
-            {fieldState.error && (
-              <p className="text-sm text-destructive mt-1">
-                {fieldState.error.message}
-              </p>
-            )}
-          </>
+          <Input
+            id={id}
+            {...rest}
+            {...field}
+            aria-invalid={fieldState.invalid || undefined}
+          />
         )}
       />
+      {/** si tienes componente de error, muéstralo aquí */}
     </div>
   );
 }

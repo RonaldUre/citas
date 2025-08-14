@@ -13,6 +13,11 @@ export const getUserById = async (id: number): Promise<UserResponse> => {
   return res.data
 }
 
+export const getUsersByRole = async (role: "ADMIN" | "PROFESSIONAL"): Promise<UserResponse[]> => {
+  const res = await api.get<UserResponse[]>(`${ENDPOINT}/role/${role}`)
+  return res.data
+}
+
 export const createUser = async (data: CreateUserDto): Promise<UserResponse> => {
   const res = await api.post<UserResponse>(ENDPOINT, data)
   return res.data

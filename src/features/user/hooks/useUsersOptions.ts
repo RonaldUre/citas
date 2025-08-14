@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "@/features/user/services/userService";
+import { getUsersByRole } from "@/features/user/services/userService";
 
 export function useUsersOptions() {
   const [options, setOptions] = useState<{ label: string; value: string }[]>([]);
 
   useEffect(() => {
-    getUsers().then((res) => {
+    getUsersByRole("PROFESSIONAL").then((res) => {
       const formatted = res
         .filter((user) => !!user.id)
         .map((user) => ({

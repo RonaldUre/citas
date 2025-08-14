@@ -34,3 +34,4 @@ export const updateServiceSchema = createServiceSchema.partial()
 // Tipos inferidos a partir del schema
 export type CreateServiceFormValues = z.infer<typeof createServiceSchema>
 export type UpdateServiceFormValues = z.infer<typeof updateServiceSchema>
+ 

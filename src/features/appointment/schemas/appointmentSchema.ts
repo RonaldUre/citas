@@ -16,13 +16,12 @@ export const appointmentSchema = z.object({
   status: appointmentStatusEnum,
   tag: z.string().optional(),
   isRecurring: z.boolean().optional(),
-  userId: z
-    .number({ error: "El profesional es obligatorio" })
-    .min(1, "Selecciona un profesional"),
-  clientId: z
-    .number({ error: "El cliente es obligatorio" })
-    .min(1, "Selecciona un cliente"),
-  serviceId: z.number().min(1).optional(),
+
+  // 👇 Ahora pueden ser undefined
+  userId: z.number().optional(),
+  clientId: z.number().optional(),
+
+  serviceId: z.number().optional(),
 });
 
 // ✅ Tipo inferido para el formulario

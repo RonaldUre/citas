@@ -1,36 +1,46 @@
-import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
-import { FormField, FormItem, FormControl, FormMessage } from '@/components/ui/form'
-import type { Control, FieldPath, FieldValues } from 'react-hook-form'
+// ControlledTextarea.tsx
+import * as React from "react";
+import { Controller, type Control, type FieldValues, type Path } from "react-hook-form";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
-interface ControlledTextareaProps<T extends FieldValues> {
-  control: Control<T>
-  name: FieldPath<T>
-  label: string
-  placeholder?: string
-  rows?: number
+type NativeTextareaProps = Omit<
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+  "name" | "value" | "defaultValue" | "onChange"
+>;
+
+export interface ControlledTextareaProps<TFieldValues extends FieldValues> extends NativeTextareaProps {
+  name: Path<TFieldValues>;
+  control: Control<TFieldValues>;
+  label?: string;
+  containerClassName?: string;
+  labelClassName?: string;
 }
 
-export function ControlledTextarea<T extends FieldValues>({
-  control,
+export function ControlledTextarea<TFieldValues extends FieldValues>({
   name,
+  control,
   label,
-  placeholder,
-  rows = 4,
-}: ControlledTextareaProps<T>) {
+  containerClassName,
+  labelClassName,
+  ...rest
+}: ControlledTextareaProps<TFieldValues>) {
+  const id = rest.id ?? String(name);
   return (
-    <FormField
-      control={control}
-      name={name}
-      render={({ field }) => (
-        <FormItem>
-          <Label htmlFor={name}>{label}</Label>
-          <FormControl>
-            <Textarea id={name} placeholder={placeholder} rows={rows} {...field} />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  )
+    <div className={containerClassName}>
+      {label && <Label htmlFor={id} className={labelClassName}>{label}</Label>}
+      <Controller
+        name={name}
+        control={control}
+        render={({ field, fieldState }) => (
+          <Textarea
+            id={id}
+            {...rest}
+            {...field}
+            aria-invalid={fieldState.invalid || undefined}
+          />
+        )}
+      />
+    </div>
+  );
 }

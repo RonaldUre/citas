@@ -7,7 +7,7 @@ import {
 import LoginPage from "@/features/auth/pages/LoginPage";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import { ClientListPage } from "@/features/client/pages/ClientListPage";
-import { ClientFormPage } from "@/features/client/pages/ClientFormPage";
+import ClientFormPage from "@/features/client/pages/ClientFormPage";
 import { UserListPage } from "@/features/user/pages/UserListPage";
 import { UserFormPage } from "@/features/user/pages/UserFormPage";
 import AppointmentCalendarPage from "@/features/appointment/pages/AppointmentCalendarPage";
@@ -16,7 +16,7 @@ import PrivateLayout from "@/components/layout/PrivateLayout";
 import NotFoundPage from "./NotFoundPage";
 import { ServiceListPage } from "@/features/service/pages/ServiceListPage";
 import { ServiceFormPage } from "@/features/service/pages/ServiceFormPage";
-
+import { AppointmentListPage } from "@/features/report/pages/AppointmentListPage"; // 👈 import nuevo
 
 export default function AppRoutes() {
   return (
@@ -52,8 +52,10 @@ export default function AppRoutes() {
           <Route path="/services/:id/edit" element={<ServiceFormPage />} />
 
           {/* Módulo Citas */}
-          {/* Módulo Citas */}
           <Route path="/appointments" element={<AppointmentCalendarPage />} />
+
+          {/* Módulo Reportes */}
+          <Route path="/reportes" element={<AppointmentListPage />} /> {/* 👈 nueva ruta */}
         </Route>
 
         {/* Ruta para página no encontrada */}
